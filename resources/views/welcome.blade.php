@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Pokavel</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,6 +40,9 @@
             <div class="content">
                 <div class="title">Pokavel</div>
             </div>
+	        <div>
+	        	<div><button>PLAY</button></div>
+	        </div>
         </div>
     </body>
 </html>
