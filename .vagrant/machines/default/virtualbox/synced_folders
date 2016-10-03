@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/pokavel":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/pokavel","hostpath":"/Users/shimadu/Code/pokavel","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/shimadu/Code/pokavel","disabled":false,"__vagrantfile":true}}}
