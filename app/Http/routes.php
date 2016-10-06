@@ -25,5 +25,5 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 /* ユーザー登録処理 */
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
+Route::get('poker.standby', 'PokerController@standby');
