@@ -7,11 +7,24 @@
 	height: 1000px;
 	background: green;
 }
+.myField, .enemyField {
+    text-align: center;
+}
+.startBtn {
+    text-align: center;
+}
 </style>
 <div class="wrapper">
-	<?php var_dump($trumps); ?>
-	            @foreach ($trumps as $trump)
-                    <img src="./image_trump/gif/{{ $trump['mark']}}_{{ $trump['number'] }}.gif" class="trump-img" alt="あなたの手札">
-                @endforeach
+    <div class="myField">
+    @for($i=0; $i<5; $i++)
+    		<img src="/image_trump/gif/z02.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
+    	@endfor
+    </div>
+    <div class="startBtn"><a href="/poker/playPoker"><button>START</button></a></div>
+    <div class="enemyField">
+        @for($i=0; $i<5; $i++)
+            <img src="/image_trump/gif/z02.gif" class="trump-img" alt="相手の手札" width="125" height="150">
+        @endfor
+    </div>
 </div>
 @endsection

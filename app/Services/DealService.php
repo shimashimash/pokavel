@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Poker;
 use App\Http\Requests;
 
-class PokerService
+class DealService
 {
 	/**
 	 * トランプを返却
@@ -30,7 +30,7 @@ class PokerService
 	 * @param $trump シャッフルされたトランプ
 	 * @return $cphands cpの手札
 	 */
-	public function getCphand($trump) {
+	public function getCpHand($trump) {
 		$cphands = array_slice($trump, 5, 5, true);
 		return $cphands;
 	}
