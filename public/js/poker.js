@@ -2,9 +2,9 @@ $(function() {
 	$('div.myCard', this).on('click', function() {
 		$(this).toggleClass('hold');
 		if ($(this).hasClass('hold')) {
-			$('#holdShadow').show();
+			$('.mask', this).show();
 		} else {
-			$('#holdShadow').hide();
+			$('.mask', this).hide();
 		}
 	});
 });
