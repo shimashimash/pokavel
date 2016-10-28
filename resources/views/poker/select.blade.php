@@ -10,7 +10,7 @@
 .myField, .enemyField {
     text-align: center;
 }
-.startBtn {
+.button {
     text-align: center;
 }
 .myCard, .cpCard {
@@ -41,7 +41,7 @@
 </style>
 <div class="wrapper">
     <div class="myField">
-        @foreach($myHand as $value)
+        @foreach($data['myHand'] as $value)
         <div class="myCard">
             <img src="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
         		<div class="mask" style="display: none;">
@@ -50,14 +50,14 @@
 		</div>
 		@endforeach
     </div>
-    <div class="startBtn"><a href="/poker/judge"><button>JUDGE</button></a></div>
+    <div class="judgeBtn button"><a href="javascript:void(0);"><button>JUDGE</button></a></div>
     <div class="enemyField">
-    		@foreach($cpHand as $value)
+    		@foreach($data['cpHand'] as $value)
     		<div class="cpCard">
 			<img src="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
+			<input type="hidden" value="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" name="cpHand[]">
 		</div>
 		@endforeach
     </div>
-
 </div>
 @endsection

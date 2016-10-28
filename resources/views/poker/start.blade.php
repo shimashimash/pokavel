@@ -10,7 +10,7 @@
 .myField, .enemyField {
     text-align: center;
 }
-.startBtn {
+.button {
     text-align: center;
 }
 </style>
@@ -20,11 +20,11 @@
     		<img src="/image_trump/gif/z02.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
     	@endfor
     </div>
-    <div class="startBtn"><a href="/poker/playPoker"><button>START</button></a></div>
+    <div class="startBtn button"><a href="/poker/select"><button>START</button></a></div>
     <div class="enemyField">
         @for($i=0; $i<5; $i++)
             <img src="/image_trump/gif/z02.gif" class="trump-img" alt="相手の手札" width="125" height="150">
         @endfor
-    </div>
+    </div>	
 </div>
 @endsection

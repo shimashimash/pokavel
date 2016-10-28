@@ -24,7 +24,13 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 /* ユーザー登録処理 */
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+/* ??????? */
 Route::auth();
+/* ゲーム選択画面の表示 */
 Route::get('/home', 'HomeController@index');
-Route::get('/poker/standby', 'PokerController@standby');
-Route::get('/poker/playPoker', 'PokerController@playPoker');
+/* pokerスタート画面の表示 */
+Route::get('/poker/start', 'PokerController@start');
+/* カード選択画面の表示 */
+Route::get('/poker/select', 'PokerController@select');
+/* 勝敗判定画面の表示 */
+Route::post('/poker/judge', 'PokerController@judge');

@@ -95,6 +95,5 @@ class DealService
 		shuffle($trump);
 	
 		return $trump;
-	}
-	
+	}	
 }

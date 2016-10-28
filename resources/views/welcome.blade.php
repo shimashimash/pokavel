@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     Pokavel
                     <div style="float: right;">
-                    	{{ link_to('/poker/standby', 'PLAY', ['class' => 'btn btn-primary']) }}
+                    	{{ link_to('/poker/start', 'PLAY', ['class' => 'btn btn-primary']) }}
 					</div>
                 </div>
             </div>

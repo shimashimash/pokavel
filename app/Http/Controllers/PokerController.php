@@ -9,21 +9,46 @@ use App\Services\DealService;
 
 class PokerController extends Controller
 {
-	public function __construct(DealService $dealService)
+	public function __construct(Poker $poker)
 	{
-		$this->deal= $dealService;
+		$this->poker = $poker;
 	}
 
-    public function standby()
+	/**
+	 * 初期表示画面
+	 *
+	 */
+    public function start()
     {
-        return view('poker/standby')->with(compact('myHand', 'cpHand'));
+        return view('poker/start');
     }
-    
-    public function playPoker()
+
+    /**
+     * カード選択画面
+     *
+     * @return array $myHand
+     * @return array $cpHand
+     */
+    public function select(Poker $poker)
     {
-        $getTrump = $this->deal->getTrump();
-        $myHand = $this->deal->getHand($getTrump);
-        $cpHand = $this->deal->getCpHand($getTrump);
-        return view('poker/playPoker')->with(compact('myHand', 'cpHand')); 
+        $getTrump = $poker->getTrump();
+        return view('poker/select')->with('data', [
+                'myHand' => $poker->getHand($getTrump),
+                'cpHand' => $poker->getCpHand($getTrump)
+        ]); 
+    }
+
+    /**
+     * 勝敗判定画面
+     *
+     * @return array $myHand
+     * @return array $cpHand
+     */
+    public function judge(Request $request)
+    {
+        return view('poker/judge')->with('data', [
+                'myHand' => $request->input('holdSrc'),
+                'cpHand' => $request->input('cpHand')
+        ]);
     }
 }
