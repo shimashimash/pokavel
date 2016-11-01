@@ -7,7 +7,7 @@
 	height: 1000px;
 	background: green;
 }
-.myField, .enemyField {
+.myField, .rank {
     text-align: center;
 }
 .button {
@@ -39,25 +39,25 @@
 	transition:		all 0.4s ease-out;
 }
 </style>
-<div class="wrapper">
-    <div class="myField">
-        @foreach($data['myHand'] as $value)
-        <div class="myCard">
-            <img src="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
-        		<div class="mask" style="display: none;">
-            		<div class="caption">Hold!</div>
-    			</div>
-		</div>
-		@endforeach
+<form action="/poker/judge" method="post" id="holdSrcForm">
+    <div class="wrapper">
+        <div class="myField">
+            @foreach($data['myHand'] as $key => $value)
+                <div class="myCard">
+                    <img src="/image_trump/gif/{{ $value }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
+                    <input type="hidden" value="/image_trump/gif/{{ $value }}.gif" name="myHand[]">
+                    <input type="hidden" value="{{ $key }}" name="key[]">
+                		<div class="mask" style="display: none;">
+                    		<div class="caption">Hold!</div>
+            			</div>
+        		</div>
+    		@endforeach
+        </div>
+        <div class="rank">
+        		{{ $data['myRank'] }}
+        </div>
+        <div class="judgeBtn button"><a href="javascript:void(0);"><button>JUDGE</button></a></div>
     </div>
-    <div class="judgeBtn button"><a href="javascript:void(0);"><button>JUDGE</button></a></div>
-    <div class="enemyField">
-    		@foreach($data['cpHand'] as $value)
-    		<div class="cpCard">
-			<img src="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
-			<input type="hidden" value="/image_trump/gif/{{ $value['mark'] }}_{{ $value['number'] }}.gif" name="cpHand[]">
-		</div>
-		@endforeach
-    </div>
-</div>
+	<input type="hidden" value="{{ csrf_token() }}" name="_token">
+</form>
 @endsection

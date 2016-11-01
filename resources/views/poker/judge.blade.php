@@ -42,23 +42,17 @@
 <div class="wrapper">
     <div class="myField">
         @foreach($data['myHand'] as $value)
-        <div class="myCard">
-            <img src="{{ $value }}" class="trump-img" alt="あなたの手札" width="125" height="150">
-        		<div class="mask" style="display: none;">
-            		<div class="caption">Hold!</div>
-    			</div>
-		</div>
+            <div class="myCard">
+                <img src="{{ $value }}" class="trump-img" alt="あなたの手札" width="125" height="150">
+            		<div class="mask" style="display: none;">
+                		<div class="caption">Hold!</div>
+        			</div>
+    		</div>
 		@endforeach
     </div>
-    <div class="judgeBtn button"><a href="javascript:void(0);"><button>JUDGE</button></a></div>
-    <div class="enemyField">
-    		{{--@foreach($data['cpHand'] as $value)--}}
-    		<div class="cpCard">
-			<img src="{{-- $value --}}" class="trump-img" alt="あなたの手札" width="125" height="150">
-		</div>
-		{{--@endforeach--}}
-    </div>
-    <?php var_dump($data['myHand']) ?>
-    <?php var_dump($data['cpHand']) ?>
+    <div class="judgeBtn button">
+    		<a href="javascript:void(0);"><button>JUDGE</button></a>
+    	</div>
 </div>
+<?php var_dump($data['input']) ?>
 @endsection
