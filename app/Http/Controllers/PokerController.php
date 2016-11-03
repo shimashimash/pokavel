@@ -49,30 +49,59 @@ class PokerController extends Controller
      * 勝敗判定画面
      *
      * @param array Request $request
+     * @param array Poker $poker
      * @return array $myHand
-     * @return array $cpHand
+     * @return 
      */
-    public function judge(Request $request)
+    public function judge(Request $request, Poker $poker)
     {
-        //山札をセッションから取得する
         $kitty = Session::get('kitty');
-        //送られてきたトランプの数を数える
-        $countPostedTrump = count($request->input('myHand'));
+        $inputMyHand = $request->input('myHand');
+        $discardKey = $request->input('discardKey');
+        $holdCardKey = $request->input('holdCardKey');
+        //$myHand = $poker->drawCards($request->input('myHand'), $kitty, $discardKey, $holdCardKey);
+        // foreach ($discardKey as $value) {
+        //     $addCardTest[$value] = 'hearts_'. $value;
+        // }
+        // $myHand = array_replace($myHand1, $addCardTest); 
+
+        $countPostedTrump = count($inputMyHand);
         if ($countPostedTrump == 5) {
-            $myHand = $request->input('myHand');
+            $myHand = $inputMyHand;
         } else {
             $countDraw = 5 - $countPostedTrump;
             $drawCards = array_slice($kitty, 0, $countDraw, true);
-            $inputMyHand = $request->input('myHand');
-            foreach ($drawCards as $value) {
-                $addTrump[] = '/image_trump/gif/'. $value. '.gif';
+            // foreach ($discardKey as $value) {
+            //     foreach ($drawCards as $value => $value1) {
+            //         $addCardTest[$value] = $value1;
+            //     }
+            // }
+            // foreach ($holdCardKey as $value) {
+            //     foreach ($inputMyHand as $value => $value1) {
+            //         $holdCardTest[$value] = $value1;
+            //     }
+            // }
+            for ($i=0; $i < $countDraw; $i++) { 
+                $addCardTest[$discardKey[$i]] = $drawCards[$i];
             }
-             $myHand = array_merge($inputMyHand, $addTrump);
+            for ($i=0; $i < $countPostedTrump; $i++) { 
+                $addCardTest[$holdCardKey[$i]] = $inputMyHand[$i];
+            }
+
+            $myHand = array_replace($holdCardTest, $addCardTest); 
+            // foreach ($drawCards as $value) {
+            //     $addTrump[] = '/image_trump/gif/'. $value. '.gif';
+            // }
         }
-        $input = $request->input('key');
-        return view('poker/judge')->with('data', [
+
+
+
+        return view('poker/judge')->with(
+            'data', [
                 'myHand' => $myHand,
-                'input' => $input
-        ]);
+                'addCardTest' => $addCardTest,
+                'holdCardTest' => $holdCardTest
+            ]
+        );
     }
 }

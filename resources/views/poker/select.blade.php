@@ -46,7 +46,7 @@
                 <div class="myCard">
                     <img src="/image_trump/gif/{{ $value }}.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
                     <input type="hidden" value="/image_trump/gif/{{ $value }}.gif" name="myHand[]">
-                    <input type="hidden" value="{{ $key }}" name="key[]">
+                    <input type="hidden" value="{{ $key }}" name="discardKey[]">
                 		<div class="mask" style="display: none;">
                     		<div class="caption">Hold!</div>
             			</div>

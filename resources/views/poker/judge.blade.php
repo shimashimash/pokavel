@@ -51,8 +51,11 @@
 		@endforeach
     </div>
     <div class="judgeBtn button">
-    		<a href="javascript:void(0);"><button>JUDGE</button></a>
-    	</div>
+    	<a href="javascript:void(0);"><button>JUDGE</button></a>
+    </div>
+    <div><a href="/poker/select">初めから</a></div>
 </div>
-<?php var_dump($data['input']) ?>
+<?php var_dump($data['myHand']) ?>
+<?php var_dump($data['addCardTest']) ?>
+<?php var_dump($data['holdCardTest']) ?>
 @endsection

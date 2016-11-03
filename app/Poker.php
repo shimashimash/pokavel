@@ -79,7 +79,39 @@ class Poker extends Model
         $result = $this->judge($cards);
         return $result;
     }
-    
+
+    /**
+     * カードを引く
+     * @param Array $inputMyHand holdされた手札
+     * @param Array $kitty 山札
+     * @return Array $myHand 手札
+     */
+    public function drawCards($inputMyHand, $kitty, $discardKey, $holdCardKey)
+    {
+        $countPostedTrump = count($inputMyHand);
+        if ($countPostedTrump == 5) {
+            $myHand = $inputMyHand;
+        } else {
+            $countDraw = 5 - $countPostedTrump;
+            $drawCards = array_slice($kitty, 0, $countDraw, true);
+            foreach ($discardKey as $value) {
+                foreach ($drawCards as $value => $value1) {
+                    $addCardTest[$value] = $value1;
+                }
+            }
+            foreach ($holdCardKey as $value) {
+                foreach ($inputMyHand as $value => $value1) {
+                    $holdCardTest[$value] = $value1;
+                }
+            }
+            $myHand = array_replace($holdCardTest, $addCardTest); 
+            // foreach ($drawCards as $value) {
+            //     $addTrump[] = '/image_trump/gif/'. $value. '.gif';
+            // }
+        }
+        return $myHand;
+    }
+
     // ********************************************************************************************
     //
     // これよりプライベートメソッド
