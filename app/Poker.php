@@ -81,9 +81,29 @@ class Poker extends Model
     }
 
     /**
+     * 役判定できるように整形する
+     * @param array $cards
+     * @return array $result
+     */
+    public function convertToCanJudge($cards)
+    {
+        foreach($cards as $value) {
+            $mark = strstr($value, "_", true);
+            $number = preg_replace('/[^0-9]/', '', $value);
+            $result[] = [
+                    "number" => $number,
+                    "mark" => $mark
+            ];
+        }
+        return $result;
+    }
+
+    /**
      * カードを引く
      * @param Array $inputMyHand holdされた手札
      * @param Array $kitty 山札
+     * @param Array $discardKey 捨てられたカードのkey
+     * @param Array $holdCardKey holdされたカードのkey
      * @return Array $myHand 手札
      */
     public function drawCards($inputMyHand, $kitty, $discardKey, $holdCardKey)
@@ -93,21 +113,17 @@ class Poker extends Model
             $myHand = $inputMyHand;
         } else {
             $countDraw = 5 - $countPostedTrump;
-            $drawCards = array_slice($kitty, 0, $countDraw, true);
-            foreach ($discardKey as $value) {
-                foreach ($drawCards as $value => $value1) {
-                    $addCardTest[$value] = $value1;
-                }
+            $aaa = array_slice($kitty, 0, $countDraw);
+            foreach ($aaa as $value) {
+                $drawCards[] = '/image_trump/gif/'. $value. '.gif';
             }
-            foreach ($holdCardKey as $value) {
-                foreach ($inputMyHand as $value => $value1) {
-                    $holdCardTest[$value] = $value1;
-                }
+            $addCard = $this->remakeCard($discardKey, $countDraw, $drawCards);
+            $holdCard = $this->remakeCard($holdCardKey, $countPostedTrump, $inputMyHand);
+            $apartMyHand = array_replace($holdCard, $addCard);
+            //key順に並べ替える
+            for ($i=0; $i<5; $i++) {
+                $myHand[] = $apartMyHand[$i];
             }
-            $myHand = array_replace($holdCardTest, $addCardTest); 
-            // foreach ($drawCards as $value) {
-            //     $addTrump[] = '/image_trump/gif/'. $value. '.gif';
-            // }
         }
         return $myHand;
     }
@@ -117,22 +133,20 @@ class Poker extends Model
     // これよりプライベートメソッド
     //
     // ********************************************************************************************
+
     /**
-     * 役判定できるように整形する
+     * keyにカードの値を代入する
+     * @param array $key
+     * @param int $countCard
      * @param array $cards
-     * @return array $cards
+     * @return array $remakeCard
      */
-    public function convertToCanJudge($cards)
+    private function remakeCard($key, $countCard, $cards)
     {
-         foreach($cards as $value) {
-            $mark = strstr($value, "_", true);
-            $number = preg_replace('/[^0-9]/', '', $value);
-            $result[] = [
-                    "number" => $number,
-                    "mark" => $mark
-            ];
+        for ($i=0; $i<$countCard; $i++) {
+            $remakeCard[$key[$i]] = $cards[$i];
         }
-        return $result;
+        return $remakeCard;
     }
 
     /**
