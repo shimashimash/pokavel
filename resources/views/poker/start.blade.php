@@ -1,19 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-.wrapper {
-	width: 100%;
-	height: 1000px;
-	background: green;
-}
-.myField, .enemyField {
-    text-align: center;
-}
-.button {
-    text-align: center;
-}
-</style>
 <div class="wrapper">
     <div class="myField">
     @for($i=0; $i<5; $i++)

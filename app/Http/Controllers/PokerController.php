@@ -1,13 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Poker;
 use App\Http\Requests;
-use App\Services\DealService;
 use Session;
 
+/**
+ * ポーカーの処理全般
+ *
+ */
 class PokerController extends Controller
 {
 	public function __construct(Poker $poker)
@@ -39,10 +41,12 @@ class PokerController extends Controller
         $myRank = $poker->getYaku($convert);
         Session::put('kitty', $kitty);
 
-        return view('poker/select')->with('data', [
-                'myHand' => $myHand,
-                'myRank' => $myRank
-        ]); 
+        return view('poker/select')->with(
+                'data', [
+                        'myHand' => $myHand,
+                        'myRank' => $myRank
+                ]
+        ); 
     }
 
     /**
@@ -56,10 +60,14 @@ class PokerController extends Controller
     public function judge(Request $request, Poker $poker)
     {
         $myHand = $poker->drawCards($request->input('myHand'), Session::get('kitty'), $request->input('discardKey'), $request->input('holdCardKey'));
-
+        $replaceMyHand = str_replace('/image_trump/gif/', '', $myHand);
+        $convertCards = $poker->convertToCanJudge($replaceMyHand);
+        $myRank = $poker->getYaku($convertCards);
+        
         return view('poker/judge')->with(
             'data', [
-                'myHand' => $myHand
+                'myHand' => $myHand,
+                'myRank' => $myRank
             ]
         );
     }
