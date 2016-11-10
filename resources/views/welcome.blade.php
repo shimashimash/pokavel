@@ -5,12 +5,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">GAME</div>
+                <div class="panel-heading">工事中</div>
                 <div class="panel-body">
-                    Pokavel
-                    <div style="float: right;">
-                    	{{ link_to('/poker/start', 'PLAY', ['class' => 'btn btn-primary']) }}
-					</div>
+                    工事中
                 </div>
             </div>
         </div>

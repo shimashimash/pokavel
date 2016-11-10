@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-    	if ($request->user()) {
     		$user = $request->user();
-    		$user_name = $user->name;
-    	}
-        return view('home')->with(compact('user_name'));
+    		$userName = $user->name;
+    		$userHaveCoin = $user->coin;
+
+        return view('home')->with(compact('userName', 'userHaveCoin'));
     }
 }

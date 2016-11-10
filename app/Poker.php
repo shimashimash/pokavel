@@ -113,8 +113,8 @@ class Poker extends Model
             $myHand = $inputMyHand;
         } else {
             $countDraw = 5 - $countPostedTrump;
-            $aaa = array_slice($kitty, 0, $countDraw);
-            foreach ($aaa as $value) {
+            $drawFromKitty = array_slice($kitty, 0, $countDraw);
+            foreach ($drawFromKitty as $value) {
                 $drawCards[] = '/image_trump/gif/'. $value. '.gif';
             }
             $addCard = $this->remakeCard($discardKey, $countDraw, $drawCards);

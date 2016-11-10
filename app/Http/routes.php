@@ -14,23 +14,60 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 /* ログイン画面の表示 */
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/login', [
+        'middleware' => 'auth',
+        'uses' => 'Auth\AuthController@getLogin'
+]);
+
 /* ログイン処理 */
-Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::post('auth/login', [
+        'middleware' => 'auth',
+        'uses' => 'Auth\AuthController@postLogin'
+]);
+
 /* ログアウト */
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', [
+        'middleware' => 'auth',
+        'uses' => 'Auth\AuthController@getLogout'
+]);
+
 /* ユーザー登録画面の表示 */
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::get('auth/register', [
+        'middleware' => 'auth',
+        'uses' => 'Auth\AuthController@getRegister'
+]);
+
 /* ユーザー登録処理 */
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::post('auth/register', [
+        'middleware' => 'auth',
+        'uses' => 'Auth\AuthController@postRegister'
+]);
+
 /* ??????? */
 Route::auth();
+
 /* ゲーム選択画面の表示 */
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [
+        'middleware' => 'auth',
+        'uses' => 'HomeController@index'
+]);
+
 /* pokerスタート画面の表示 */
-Route::get('/poker/start', 'PokerController@start');
+Route::get('/poker/start', [
+        'middleware' => 'auth',
+        'uses' => 'PokerController@start'
+]);
+
 /* カード選択画面の表示 */
-Route::get('/poker/select', 'PokerController@select');
+Route::get('/poker/select', [
+        'middleware' => 'auth',
+        'uses' => 'PokerController@select'
+]);
+
 /* 勝敗判定画面の表示 */
-Route::post('/poker/judge', 'PokerController@judge');
+Route::post('/poker/judge', [
+        'middleware' => 'auth',
+        'uses' => 'PokerController@judge'
+]);

@@ -33,10 +33,15 @@ class PokerController extends Controller
      * @return array $myHand
      * @return array $cpHand
      */
-    public function select(Poker $poker)
+    public function select(Poker $poker, Request $request)
     {
-        $myHand = $poker->getHand($poker->getTrump());
-        $kitty = $poker->getKitty($poker->getTrump());
+        // ユーザー情報を取得する
+        $user = $request->user();
+
+        // 手札を取得する
+        $trump = $poker->getTrump();
+        $myHand = $poker->getHand($trump);
+        $kitty = $poker->getKitty($trump);
         $convert = $poker->convertToCanJudge($myHand);
         $myRank = $poker->getYaku($convert);
         Session::put('kitty', $kitty);
@@ -44,7 +49,8 @@ class PokerController extends Controller
         return view('poker/select')->with(
                 'data', [
                         'myHand' => $myHand,
-                        'myRank' => $myRank
+                        'myRank' => $myRank,
+                        'userHaveCoin' => $user->coin
                 ]
         ); 
     }
@@ -59,7 +65,17 @@ class PokerController extends Controller
      */
     public function judge(Request $request, Poker $poker)
     {
-        $myHand = $poker->drawCards($request->input('myHand'), Session::get('kitty'), $request->input('discardKey'), $request->input('holdCardKey'));
+        if ($request->input('myHand')) {
+            // holdされたカードがあるときの処理
+            $myHand = $poker->drawCards($request->input('myHand'), Session::get('kitty'), $request->input('discardKey'), $request->input('holdCardKey'));
+        } else {
+            // holdされたカードがないときの処理
+            $countMyHand = count($request->input('hand'));
+            $drawFromKitty = array_slice(Session::get('kitty'), 0, $countMyHand);
+            foreach($drawFromKitty as $value) {
+                $myHand[] = '/image_trump/gif/'. $value. '.gif';
+            }
+        }
         $replaceMyHand = str_replace('/image_trump/gif/', '', $myHand);
         $convertCards = $poker->convertToCanJudge($replaceMyHand);
         $myRank = $poker->getYaku($convertCards);
