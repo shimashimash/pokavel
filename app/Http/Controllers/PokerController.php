@@ -76,8 +76,11 @@ class PokerController extends Controller
                 $myHand[] = '/image_trump/gif/'. $value. '.gif';
             }
         }
+        
+        // 役判定できるように手札を変換
         $replaceMyHand = str_replace('/image_trump/gif/', '', $myHand);
         $convertCards = $poker->convertToCanJudge($replaceMyHand);
+
         $myRank = $poker->getYaku($convertCards);
         
         return view('poker/judge')->with(
