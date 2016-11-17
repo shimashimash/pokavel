@@ -4,6 +4,10 @@
     height: 1000px;
     background: green;
 }
+.trumpImg {
+	width: 125px;
+	height: 150px;
+}
 .myField, .rank {
     text-align: center;
 }

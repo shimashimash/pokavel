@@ -3,8 +3,8 @@
 @section('content')
 <div class="wrapper">
     <div class="myField">
-    @for($i=0; $i<5; $i++)
-    		<img src="/image_trump/gif/z02.gif" class="trump-img" alt="あなたの手札" width="125" height="150">
+        @for($i=0; $i<5; $i++)
+            {{ Html::image('/image_trump/gif/z02.gif', 'トランプ', ['class' => 'trumpImg']) }}
     	@endfor
     </div>
     <div class="startBtn button"><a href="/poker/select"><button>START</button></a></div>
