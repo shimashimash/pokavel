@@ -11,3 +11,8 @@ Homestead.json
 .vagrant/machines/default/virtualbox/index_uuid
 .vagrant/machines/default/virtualbox/private_key
 .vagrant/machines/default/virtualbox/synced_folders
+.idea/blade.xml
+.idea/modules.xml
+.idea/pokavel.iml
+.idea/vcs.xml
+.idea/workspace.xml

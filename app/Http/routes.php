@@ -71,3 +71,9 @@ Route::post('/poker/judge', [
         'middleware' => 'auth',
         'uses' => 'PokerController@judge'
 ]);
+
+/* Ajaxのテスト */
+Route::get('/start/ajax', [
+        'middleware' => 'auth',
+        'uses' => 'PokerController@getAjax'
+]);

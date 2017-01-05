@@ -1,4 +1,27 @@
 $(function() {
+	//startボタンを押した時の処理
+	$('#start').on('click', function() {
+	    // var src = $('.trumpImg').attr('src');
+	    // $.ajax({
+	    //   url: '/poker/start', // 送信先
+	    //   type: 'GET',
+	    //   cache: false,
+	    //   data: {'src':src},
+	    //   dataType: 'json',//⇦こいつが原因
+	    // })
+	    // .done(function( data, textStatus, jqXHR ) { // 成功した時の処理
+	    //   $('#start').after(data);
+	    // 	  console.log(data);
+	    // 	  console.log('success');
+	    // })
+	    // .fail(function( jqXHR, textStatus, errorThrown ) { // 失敗した時の処理
+	    //   console.log('fail!');
+	    // })
+	    // .always(function( data, textStatus, errorThrown ) { // 通信に成功しても失敗しても表示される処理
+	    //   console.log('always');
+	    // });
+	});
+
 	//HoldのON,OFF
 	$('div.myCard', this).on('click', function() {
 		$(this).toggleClass('hold');
@@ -24,5 +47,7 @@ $(function() {
 			$('.myField').append(holdSrcInput);
 			$('#holdSrcForm').submit();
 		}
+		//選択されたコインの値を取得する
+		$('[name=bet] option:selected').text();
 	});
 });

@@ -12,5 +12,15 @@
     <div class="rank">
     		{{ $data['myRank'] }}
     </div>
+    <div class="">
+        @if (0 < $data['getCoin'])
+            <p>おめでとうございます！{{ $data['getCoin'] }}ポイントを手に入れました！</p>
+        @else
+            <p>残念でした！</p>
+        @endif
+    </div>
+    <div>
+        <a href="/poker/select">もう一回！</a>
+    </div>
 </div>
 @endsection

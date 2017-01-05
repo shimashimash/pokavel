@@ -68,6 +68,9 @@
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
+                        <li>
+                        <li><a href="javascript:void(0);">所持コイン{{ Auth::user()->coin }}</a></li>
+                        </li>
                     @endif
                 </ul>
             </div>

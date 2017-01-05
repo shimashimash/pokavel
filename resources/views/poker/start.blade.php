@@ -7,6 +7,6 @@
             {{ Html::image('/image_trump/gif/z02.gif', 'トランプ', ['class' => 'trumpImg']) }}
     	@endfor
     </div>
-    <div class="startBtn button"><a href="/poker/select"><button>START</button></a></div>
+    <div class="startBtn button"><a href="/poker/select"><button id="start">START</button></a></div>
 </div>
 @endsection

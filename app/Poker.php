@@ -128,6 +128,42 @@ class Poker extends Model
         return $myHand;
     }
 
+    /**
+     * 判定結果から取得コインを算出する
+     * @param Array $user ユーザー情報
+     * @param Array $useCoin ゲームでかけたコイン
+     * @param Array $resultCoin 結果得られたコイン
+     * @return Array $totalCoin トータルのユーザー所持コイン
+     */
+    public function coinManagement($user, $useCoin, $resultCoin)
+    {
+        //ユーザー所持コイン
+        $userHaveCoin = $user->coin;
+
+        //プレイ後のユーザー所持コイン
+        $playAfterCoin = $userHaveCoin - $useCoin;
+
+        //プレイ結果で取得したコイン
+        $getCoin = $useCoin * $resultCoin;
+
+        //トータルのユーザー所持コイン
+        $totalCoin = $playAfterCoin + $getCoin;
+
+        return $totalCoin;
+    }
+
+    /**
+     * 約判定ができるように手札を変換する
+     *
+     * @param Array $myHand 手札
+     * @return Array $replaceMyHand 変換された手札
+     */
+    public function replaceMyHand($myHand)
+    {
+        $replaceMyHand = str_replace('/image_trump/gif/', '', $myHand);
+        return $replaceMyHand;
+    }
+
     // ********************************************************************************************
     //
     // これよりプライベートメソッド

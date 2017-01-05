@@ -19,8 +19,9 @@
         		{{ $data['myRank'] }}
         </div>
         <div class="judgeBtn button"><a href="javascript:void(0);"><button>JUDGE</button></a></div>
-        <div>所持コイン：{{ $data['userHaveCoin'] }}枚</div>
-        <div>かけるコインの数を決めてください {{ Form::select('bet', ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']) }}</div>
+        <div>
+            <div>かけるコインの数を決めてください {{ Form::select('bet', config('app.judge.selectCoin')) }}</div>
+        </div>
     </div>
     {!! Form::hidden('_token', csrf_token()) !!}
 {!! Form::close() !!}
